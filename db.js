@@ -1,12 +1,14 @@
 const {MongoClient} = require("mongodb")
+const dotenv = require('dotenv')
+dotenv.config()
 
-const client = new MongoClient("mongodb+srv://<username>:<password>@cluster0.azld7rd.mongodb.net/?retryWrites=true&w=majority&appName=IntercomApp")
+const client = new MongoClient(process.env.CONNECTIONSTRING)
 
 async function start() {
     await client.connect()
     module.exports = client.db()
     const app = require("./app")
-    app.listen(3000)
+    app.listen(process.env.PORT)
 }
 
 start()
