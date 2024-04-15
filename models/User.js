@@ -60,4 +60,16 @@ User.prototype.register = function() {
     }
 }
 
+User.prototype.login = function() {
+    return new Promise(async(resolve, reject) => {
+        this.cleanUp()
+        const attemptedUser = await usersCollection.findOne({username: this.data.username})
+        if(attemptedUser && attemptedUser.password == this.data.password) {
+            resolve("congrats")
+        } else {
+            reject("invalid username/password")
+        }
+    })
+}
+
 module.exports = User
