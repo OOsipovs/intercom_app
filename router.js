@@ -10,7 +10,8 @@ router.post("/register", userController.register)
 
 //post routes
 router.get("/create-post", userController.mustBeLoggenIn, postController.viewCreateScreen)
-
+router.post("/create-post", userController.mustBeLoggenIn, postController.create)
+router.get("/post/:id", postController.viewSingle)
 
 
 module.exports = router
